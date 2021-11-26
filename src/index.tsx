@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './utils/i18n';
+import UIStore from './store/ui';
+import { UIContext } from './store';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <UIContext.Provider value={new UIStore()}>
+            <Suspense fallback='loading'>
+                <App />
+            </Suspense>
+        </UIContext.Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

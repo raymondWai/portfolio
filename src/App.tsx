@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useContext, useMemo } from 'react';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { createTheme, responsiveFontSizes } from '@mui/material';
+import { ThemeProvider } from '@mui/styles';
+import UIStore from './store/ui';
+import { observer } from 'mobx-react';
+import Theme from './constants/theme';
+import { UIContext } from './store';
+import DarkTheme from './themes/dark';
+import WhiteTheme from './themes/white';
+import { renderRoutes } from 'react-router-config';
+import routeConfig from './constants/route';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const uiStore = useContext<UIStore>(UIContext);
+    const theme = useMemo(
+        () =>
+            responsiveFontSizes(
+                createTheme(
+                    uiStore.getTheme === Theme.Dark ? DarkTheme : WhiteTheme
+                )
+            ),
+        [uiStore.getTheme]
+    );
+    return (
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>{renderRoutes(routeConfig)}</BrowserRouter>
+        </ThemeProvider>
+    );
 }
 
-export default App;
+export default observer(App);
