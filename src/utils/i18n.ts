@@ -15,4 +15,10 @@ i18n.use(Backend)
         interpolation: {
             escapeValue: false,
         },
+        backend: {
+            loadPath: `${window.location.pathname}locales/{{lng}}/{{ns}}.json`,
+        },
+        react: {
+            wait: true,
+        },
     });
