@@ -3,5 +3,12 @@
     "zh-HK": "中文",
     "locale": "語言",
     "dark": "夜晚",
-    "white": "日頭"
+    "white": "日頭",
+    "expand_all": "展開全部",
+    "collapse_all": "收縮所有",
+    "personal_info": "個人資料",
+    "work_experience": "工作經驗",
+    "education": "學歷",
+    "skills": "技能",
+    "languages": "語言"
 }
