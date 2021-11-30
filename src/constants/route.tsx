@@ -12,7 +12,7 @@ export enum Routes {
 }
 export const RouteKeyMap = {
     [Routes.Home]: {
-        path: '/',
+        path: '/portfolio/',
         icon: ({ selected }: { selected: boolean }) => (
             <HomeIcon
                 sx={{
@@ -23,7 +23,7 @@ export const RouteKeyMap = {
         ),
     },
     [Routes.Demo]: {
-        path: '/demo',
+        path: '/portfolio/demo',
         icon: ({ selected }: { selected: boolean }) => (
             <SlideshowIcon
                 sx={{
