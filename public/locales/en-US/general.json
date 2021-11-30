@@ -3,5 +3,12 @@
     "zh-HK": "中文",
     "locale": "Locale",
     "dark": "Dark",
-    "white": "White"
+    "white": "White",
+    "expand_all": "Expand all",
+    "collapse_all": "Collapse all",
+    "personal_info": "Personal Info",
+    "work_experience": "Work Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages"
 }

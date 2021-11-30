@@ -5,23 +5,21 @@ import {
     Radio,
     RadioGroup,
     Typography,
-    TypographyProps,
+    typographyClasses,
 } from '@mui/material';
-import { styled, Theme } from '@mui/system';
-import { Styles, withStyles } from '@mui/styles';
+import { styled } from '@mui/system';
 
 const RowFormControl = styled(FormControl)(({ theme }) => ({
     flexDirection: 'row',
     marginHorizontal: '1rem',
 }));
-const VCenterLabel = withStyles<Styles<Theme, TypographyProps>>(theme=>({
-    root: {
+const VCenterLabel = styled(Typography)(({ theme }) => ({
+    [`&.${typographyClasses.root}`]: {
         alignSelf: 'center',
         marginRight: '1rem !important',
-        color: theme.palette.text.primary
-
-    }
-}))(Typography);
+        color: theme.palette.text.primary,
+    },
+}));
 
 interface RadioInputProps<OptionType> {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;

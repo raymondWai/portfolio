@@ -5,13 +5,11 @@ import {
     IconButton,
     Stack,
     Toolbar,
-    ToolbarProps,
+    toolbarClasses,
     Typography,
 } from '@mui/material';
-import { styled, Styles, withStyles } from '@mui/styles';
+import { styled } from '@mui/styles';
 import { TFunction } from 'react-i18next';
-import { Theme } from '@mui/system';
-import HomeIcon from '@mui/icons-material/Home';
 import Brightness3Icon from '@mui/icons-material/Brightness3';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import Locale from '../constants/locale';
@@ -27,16 +25,15 @@ const StyledAppbar = styled(AppBar)(({ theme }) => {
         height: theme.dimension.header,
     };
 });
-const StyledToolbar = withStyles<Styles<Theme, ToolbarProps>>(
-    (theme: Theme) => ({
-        root: {
-            minHeight: `${theme.dimension.header} !important`,
-            height: theme.dimension.header,
-            display: 'flex',
-            justifyContent: 'space-between',
-        },
-    })
-)(Toolbar);
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+    [`&.${toolbarClasses.root}`]: {
+        minHeight: `${theme.dimension.header} !important`,
+        height: theme.dimension.header,
+        display: 'flex',
+        justifyContent: 'space-between',
+        paddingLeft: '0 !important',
+    },
+}));
 const WhiteThemeIcon = styled(WbSunnyIcon)(({ theme }) => ({
     color: theme.palette.secondary.main,
 }));
@@ -63,12 +60,20 @@ const Header = ({
     return (
         <StyledAppbar position='static'>
             <StyledToolbar>
-                <IconButton onClick={handleCollapseBtnClick}>
+                <IconButton
+                    onClick={handleCollapseBtnClick}
+                    sx={{
+                        paddingLeft: 0,
+                    }}
+                >
                     <ExpandLessIcon
                         sx={{
                             transformOrigin: 'center',
-                            transform: sidebarCollapse ? 'rotate(90deg)' : 'rotate(-90deg)',
+                            transform: sidebarCollapse
+                                ? 'rotate(90deg)'
+                                : 'rotate(-90deg)',
                             color: 'text.primary',
+                            marginLeft: '1rem',
                         }}
                     />
                 </IconButton>

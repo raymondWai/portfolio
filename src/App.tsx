@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { createTheme, responsiveFontSizes } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider as SystemThemeProvider } from '@mui/material';
 import UIStore from './store/ui';
 import { observer } from 'mobx-react';
 import Theme from './constants/theme';
@@ -24,9 +25,13 @@ function App() {
         [uiStore.getTheme]
     );
     return (
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>{renderRoutes(routeConfig)}</BrowserRouter>
-        </ThemeProvider>
+        <SystemThemeProvider theme={theme}>
+            {/* theme for sx props */}
+            <ThemeProvider theme={theme}>
+                {/* theme for styled component */}
+                <BrowserRouter>{renderRoutes(routeConfig)}</BrowserRouter>
+            </ThemeProvider>
+        </SystemThemeProvider>
     );
 }
 

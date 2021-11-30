@@ -7,13 +7,13 @@ const DarkTheme: CustomTheme = {
             main: blue[400],
             light: blue[300],
             dark: blue[800],
-            contrastText: '#ffffff'
+            contrastText: '#ffffff',
         },
         secondary: {
             main: '#fdf100',
             light: '#f9f395',
             dark: '#ded502',
-            contrastText: '#000000'
+            contrastText: '#000000',
         },
         text: {
             primary: '#ffffff',

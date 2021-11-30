@@ -3,15 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './utils/i18n';
 import UIStore from './store/ui';
 import { UIContext } from './store';
+import { I18nextProvider } from 'react-i18next';
+import i18n from './utils/i18n';
 
 ReactDOM.render(
     <React.StrictMode>
         <UIContext.Provider value={new UIStore()}>
             <Suspense fallback='loading'>
-                <App />
+                <I18nextProvider i18n={i18n}>
+                    <App />
+                </I18nextProvider>
             </Suspense>
         </UIContext.Provider>
     </React.StrictMode>,

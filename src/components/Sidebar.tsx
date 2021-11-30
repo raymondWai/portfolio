@@ -1,25 +1,24 @@
 import {
-    Box,
     List,
     ListItemButton,
+    listItemButtonClasses,
     ListItemIcon,
     ListItemText,
-    Theme,
 } from '@mui/material';
 import { Location } from 'history';
 import React, { MouseEvent, useMemo } from 'react';
 import { TFunction } from 'react-i18next';
 import { RouteKeyMap, Routes } from 'src/constants/route';
-import { withStyles } from '@mui/styles';
+import { styled } from '@mui/styles';
 
-const StyledItemButton = withStyles((theme: Theme) => ({
-    selected: {
+const StyledItemButton = styled(ListItemButton)(({ theme }) => ({
+    [`&.${listItemButtonClasses.selected}`]: {
         backgroundColor: `${theme.palette.primary.light} !important`,
         color: `${theme.palette.secondary.contrastText} !important`,
         alignContent: 'center',
         display: 'flex',
     },
-}))(ListItemButton);
+}));
 interface RouteItemProps {
     onClick: (e: MouseEvent<HTMLDivElement>) => void;
     selected: boolean;
@@ -44,10 +43,15 @@ const RouteItem = ({
             >
                 {icon({ selected })}
             </ListItemIcon>
-            {!collapse && <ListItemText primary={name}  sx={{
-                margin: '0 0.5rem',
-                marginTop: '0.2rem'
-            }}/>}
+            {!collapse && (
+                <ListItemText
+                    primary={name}
+                    sx={{
+                        margin: '0 0.5rem',
+                        marginTop: '0.2rem',
+                    }}
+                />
+            )}
         </StyledItemButton>
     );
 };
