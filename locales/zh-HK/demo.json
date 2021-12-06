@@ -1,0 +1,17 @@
+{
+    "greeting": "歡迎嚟到天氣預測查詢系統",
+    "select_current_location": "或者話我聽你而家喺邊？",
+    "input_location": "講我聽你想睇邊道天氣？",
+    "options": "選項",
+    "no_of_day": "預測日數",
+    "tempUnit": "温度單位",
+    "tempUnit_K": "K",
+    "tempUnit_C": "°C",
+    "tempUnit_F": "°F",
+    "max_temp": "最高温度",
+    "min_temp": "最低温度",
+    "precipitation": "落雨機率",
+    "description": "描述",
+    "feel_likes": "體感温度",
+    "location_not_found": "揾唔到你入嗰個位!"
+}
