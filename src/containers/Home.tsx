@@ -20,15 +20,15 @@ import Home from '../components/Home';
 
 const HomeContainer = (props: RouteProps) => {
     const { t } = useTranslation(['general']);
-    const [resumeEntries, setResumeEntries] = useState(
+    const [resumeEntries, setResumeEntries] = useState( //resume data
         workExperiences.map((exp) => ({
             ...exp,
             expanded: false,
         }))
     );
-    const [activeSection, setActiveSection] = useState(0);
+    const [activeSection, setActiveSection] = useState(0);//state of right sidebar
     const expanded = useMemo(
-        () => resumeEntries.filter((entry) => !entry.expanded).length === 0,
+        () => resumeEntries.filter((entry) => !entry.expanded).length === 0, //true if all resume entry shown expanded
         [resumeEntries]
     );
 
@@ -68,6 +68,7 @@ const HomeContainer = (props: RouteProps) => {
     );
 
     useEffect(() => {
+        // expand corr. entries when active section changed
         switch (activeSection) {
             case 0:
                 setResumeEntries(

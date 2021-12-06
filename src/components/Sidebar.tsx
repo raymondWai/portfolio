@@ -9,7 +9,7 @@ import { Location } from 'history';
 import React, { MouseEvent, useMemo } from 'react';
 import { TFunction } from 'react-i18next';
 import { RouteKeyMap, Routes } from 'src/constants/route';
-import { styled } from '@mui/styles';
+import { styled, useTheme } from '@mui/styles';
 
 const StyledItemButton = styled(ListItemButton)(({ theme }) => ({
     [`&.${listItemButtonClasses.selected}`]: {
@@ -49,6 +49,7 @@ const RouteItem = ({
                     sx={{
                         margin: '0 0.5rem',
                         marginTop: '0.2rem',
+                        color: 'text.primary'
                     }}
                 />
             )}
@@ -62,6 +63,7 @@ interface SidebarProps {
     t: TFunction<('general' | 'route')[], undefined>;
 }
 const Sidebar = ({ location, history, collapse, t }: SidebarProps) => {
+    const theme = useTheme();
     const routes = useMemo(
         () =>
             Object.values(Routes).map((route, index) => {
@@ -89,6 +91,8 @@ const Sidebar = ({ location, history, collapse, t }: SidebarProps) => {
             sx={{
                 bgcolor: '#404040',
                 flexGrow: 1,
+                backgroundColor: 'background.default',
+                borderRight: `0.1rem solid ${theme.palette.primary.main}`
             }}
         >
             {routes}

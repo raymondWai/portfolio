@@ -5,6 +5,7 @@ export const getDisplayType = (
     element: RefObject<HTMLDivElement>
 ) => {
     if(container.current && element.current) {
+        //if the container is smaller then the child, return block else flex
         if (container.current.clientHeight < element.current.clientHeight) {
             return 'block'
         }

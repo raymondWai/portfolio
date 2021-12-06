@@ -13,7 +13,7 @@ const RowFormControl = styled(FormControl)(({ theme }) => ({
     flexDirection: 'row',
     marginHorizontal: '1rem',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
 }));
 const VCenterLabel = styled(Typography)(({ theme }) => ({
     [`&.${typographyClasses.root}`]: {
@@ -48,6 +48,11 @@ export default function RadioInput<OptionType>({
                         <Radio
                             color='secondary'
                             checked={value === option.value}
+                            sx={{
+                                '& input:hover, &:hover': {
+                                    backgroundColor: 'rgba(0,0,0,0)'
+                                },
+                            }}
                         />
                     }
                     label={option.translation}

@@ -6,17 +6,17 @@ const WhiteTheme: CustomTheme = {
             main: '#3fb550',
             light: '#8ff1a4',
             dark: '#3ab14c',
-            contrastText: '#ffffff',
+            contrastText: '#161616',
         },
         secondary: {
             main: '#0024fd',
             light: '#7a82f3',
             dark: '#0a22b3',
-            contrastText: '#ffffff',
+            contrastText: '#161616',
         },
         text: {
             primary: '#161616',
-            secondary: '#e0dede',
+            secondary: '#161616',
         },
         background: {
             default: '#e0dede',

@@ -7,9 +7,9 @@ import type {
 } from './types';
 
 export default class DataStore {
-    weatherForcast: WeatherForecastType | null;
-    locationList: Array<LocationLabelType>;
-    mapClient: google.maps.places.PlacesService | null;
+    weatherForcast: WeatherForecastType | null;//weather forcast data fetched
+    locationList: Array<LocationLabelType>; //location match the user input
+    mapClient: google.maps.places.PlacesService | null;//mapClient which used to call google api
     loadingLocation: boolean;
     loadingWeather: boolean;
 
@@ -65,23 +65,24 @@ export default class DataStore {
                 this.loadingLocation = true;
                 this.mapClient.findPlaceFromQuery(
                     {
-                        fields: ['formatted_address', 'geometry'],
+                        fields: ['formatted_address', 'geometry'],// get formatted_address and geometry only to save cost
                         query,
                     },
                     (resp, status) => {
-                        this.loadingLocation = false;
+                        this.loadingLocation = false; // stop loading anyway
                         if (
                             status === google.maps.places.PlacesServiceStatus.OK
                         ) {
+                            //if ok, update location list
                             resolve(resp);
                             if (resp) {
-                                console.log('resp', resp);
                                 this.locationList = resp.map((location) => ({
                                     label: location.formatted_address,
                                     coord: location.geometry?.location?.toJSON(),
                                 }));
                             }
                         } else {
+                            //do nothing and reject
                             reject(status);
                         }
                     }

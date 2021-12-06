@@ -148,6 +148,7 @@ const Demo = ({
                 />
             </Typography>
             <Card
+                elevation={0}
                 sx={{
                     backgroundColor: 'background.default',
                 }}

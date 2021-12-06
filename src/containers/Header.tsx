@@ -14,6 +14,7 @@ const HeaderContainer = () => {
 
     const handleLocaleChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
+            //change and store the language in mobx store and localStorage
             i18n.changeLanguage(e.target.value);
             localStorage.setItem(LocalStorageKey.Locale, e.target.value);
             uiStore.setLocale(e.target.value as Locale);
@@ -22,6 +23,7 @@ const HeaderContainer = () => {
     );
     const handleThemeChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
+            //change and store the theme in mobx store and localStorage
             localStorage.setItem(
                 LocalStorageKey.Theme,
                 e.target.checked ? ThemeEnum.Dark : ThemeEnum.White

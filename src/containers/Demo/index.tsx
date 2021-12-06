@@ -46,6 +46,7 @@ const DemoContainer = (props: DemoProps) => {
 
     const onLocationInputChange = useCallback(
         (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+            //emit value to debounce ovserver
             if (searchDebounceObs.current) {
                 searchDebounceObs.current.next(e.target.value);
             }
@@ -59,6 +60,7 @@ const DemoContainer = (props: DemoProps) => {
                     lat: parseFloat(lat),
                     lon: parseFloat(lon),
                 });
+                //get weather forcast
                 dataStore.getForcast({
                     lat,
                     lon,
@@ -114,7 +116,6 @@ const DemoContainer = (props: DemoProps) => {
         ) => {
             if (details?.option && details?.option.coord) {
                 const { lat, lng } = details?.option.coord;
-                console.log('onLocationSelect', lat, lng);
                 setCoord({
                     lat,
                     lon: lng,
@@ -125,6 +126,7 @@ const DemoContainer = (props: DemoProps) => {
     );
 
     useEffect(() => {
+        //set debounce input subscription
         searchDebounceObs.current = new Subject<string>();
         searchDebounceSub.current = searchDebounceObs.current
             ?.pipe(debounceTime(500))
@@ -132,12 +134,14 @@ const DemoContainer = (props: DemoProps) => {
                 dataStore.searchLocations(query);
             });
         return () => {
+            //unsubscribe the observer when clean up
             searchDebounceSub.current?.unsubscribe();
         };
     }, [searchDebounceObs, searchDebounceSub, dataStore]);
 
     useEffect(() => {
         if (coord.lat && coord.lon) {
+            //auto refetch the forcast when coord, language, unit changed
             dataStore.getForcast({
                 lat: coord.lat.toString(),
                 lon: coord.lon.toString(),

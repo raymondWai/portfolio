@@ -3,13 +3,16 @@ export const getGeoLocation = async () => {
         lat: string;
         lon: string;
     }>((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(
-            (pos) =>
-                resolve({
-                    lat: pos.coords.latitude.toString(),
-                    lon: pos.coords.longitude.toString(),
-                }),
-            (error) => reject(error)
-        );
+        //get location from broswer api if browser support it
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) =>
+                    resolve({
+                        lat: pos.coords.latitude.toString(),
+                        lon: pos.coords.longitude.toString(),
+                    }),
+                (error) => reject(error)
+            );
+        }
     });
 };

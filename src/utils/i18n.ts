@@ -8,7 +8,7 @@ i18n.use(Backend)
     .use(initReactI18next)
     .init({
         fallbackLng: Locale.EN,
-        ns: ['general'],
+        ns: ['general', 'demo', 'routes'],
         defaultNS: 'general',
         debug: true,
         interpolation: {

@@ -34,6 +34,7 @@ function App() {
         [uiStore.theme]
     );
     useEffect(() => {
+        //load the map client when script is fetched
         if (isLoaded) {
             dataStore.setMapClient();
         }

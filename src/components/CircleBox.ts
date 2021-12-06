@@ -5,7 +5,7 @@ export default styled(Box)(({ theme }) => ({
     width: '2rem',
     height: '2rem',
     borderRadius: '2rem',
-    background: theme.palette.primary.contrastText,
+    background: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

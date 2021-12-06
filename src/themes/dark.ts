@@ -17,7 +17,7 @@ const DarkTheme: CustomTheme = {
         },
         text: {
             primary: '#ffffff',
-            secondary: '#161616',
+            secondary: '#ffffff',
         },
         background: {
             default: '#161616',
