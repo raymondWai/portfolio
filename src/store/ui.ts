@@ -16,15 +16,6 @@ export default class UIStore {
         this.locale = (locale ? locale : Locale.EN) as Locale;
         this.sidebarCollapse = false;
     }
-    get getTheme(): Theme {
-        return this.theme;
-    }
-    get getLocale(): Locale {
-        return this.locale;
-    }
-    get getSidebarCollapse(): boolean {
-        return this.sidebarCollapse
-    }
 
     setTheme(theme: Theme): void {
         this.theme = theme;

@@ -11,6 +11,13 @@ const SidebarContainer = () => {
     const history = useHistory();
     const { t } = useTranslation(['general', 'routes']);
     const uiStore = useContext<UIStore>(UIContext);
-    return <Sidebar location={location} history={history} t={t} collapse={uiStore.getSidebarCollapse}/>;
+    return (
+        <Sidebar
+            location={location}
+            history={history}
+            t={t}
+            collapse={uiStore.sidebarCollapse}
+        />
+    );
 };
 export default observer(SidebarContainer);

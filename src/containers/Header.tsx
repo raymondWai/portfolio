@@ -32,16 +32,19 @@ const HeaderContainer = () => {
         },
         [uiStore]
     );
-    const handleCollapseBtnClick = useCallback((e:MouseEvent<HTMLButtonElement>) => {
-        uiStore.setSidebarCollapse(!uiStore.getSidebarCollapse);
-    }, [uiStore])
+    const handleCollapseBtnClick = useCallback(
+        (e: MouseEvent<HTMLButtonElement>) => {
+            uiStore.setSidebarCollapse(!uiStore.sidebarCollapse);
+        },
+        [uiStore]
+    );
 
     return (
         <Header
             t={t}
-            locale={uiStore.getLocale}
-            theme={uiStore.getTheme}
-            sidebarCollapse={uiStore.getSidebarCollapse}
+            locale={uiStore.locale}
+            theme={uiStore.theme}
+            sidebarCollapse={uiStore.sidebarCollapse}
             handleLocaleChange={handleLocaleChange}
             handleThemeChange={handleThemeChange}
             handleCollapseBtnClick={handleCollapseBtnClick}

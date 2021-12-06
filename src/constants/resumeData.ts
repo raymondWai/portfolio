@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-str */
 export const sections = [
     'personal_info',
     'work_experience',
@@ -163,3 +164,5 @@ export const languages: Array<ResumeEntryType> = [
         description: '',
     },
 ];
+
+/* eslint-enable no-multi-str */

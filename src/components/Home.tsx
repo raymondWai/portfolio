@@ -1,6 +1,5 @@
 import React, {
     forwardRef,
-    Ref,
     RefObject,
     MouseEvent,
     useRef,
@@ -63,7 +62,9 @@ const Home = ({
     const stepperContainerRef = useRef<HTMLDivElement>(null);
     const stepperRef = useRef<HTMLDivElement>(null);
     const [displayType, setDisplayType] = useState('flex');
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const [_, windowHeight] = useWindowSize();
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     useEffect(() => {
         setDisplayType(getDisplayType(stepperContainerRef, stepperRef));

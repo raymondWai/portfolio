@@ -1,0 +1,17 @@
+{
+    "greeting": "Welcome to Weather Forcast Checking System",
+    "select_current_location": "Or Select Current Location",
+    "input_location": "Please Input the location",
+    "options": "Options",
+    "no_of_day": "No. Of Forcast days",
+    "tempUnit": "Temperature Unit",
+    "tempUnit_K": "K",
+    "tempUnit_C": "°C",
+    "tempUnit_F": "°F",
+    "max_temp": "Max Temp.",
+    "min_temp": "Min Temp.",
+    "precipitation": "Precipitation",
+    "description": "Description",
+    "feel_likes": "Feel Likes",
+    "location_not_found": "Location Not Found!"
+}

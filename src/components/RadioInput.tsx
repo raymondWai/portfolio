@@ -12,6 +12,8 @@ import { styled } from '@mui/system';
 const RowFormControl = styled(FormControl)(({ theme }) => ({
     flexDirection: 'row',
     marginHorizontal: '1rem',
+    display: 'flex',
+    flexWrap: 'wrap'
 }));
 const VCenterLabel = styled(Typography)(({ theme }) => ({
     [`&.${typographyClasses.root}`]: {
@@ -57,7 +59,17 @@ export default function RadioInput<OptionType>({
     return (
         <RowFormControl>
             <VCenterLabel>{title}</VCenterLabel>
-            <RadioGroup row aria-label={title} onChange={onChange}>
+            <RadioGroup
+                row
+                aria-label={title}
+                onChange={onChange}
+                sx={{
+                    display: 'flex',
+                    flexGrow: 1,
+                    flexDirection: 'row',
+                    overflow: 'auto',
+                }}
+            >
                 {memoOptions}
             </RadioGroup>
         </RowFormControl>
