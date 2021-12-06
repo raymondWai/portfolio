@@ -22,7 +22,7 @@ export const personalInfos: Array<ResumeEntryType> = [
         description: '6475635796',
     },
     {
-        position: 'Finch ave E',
+        position: 'Pemberton ave',
         duration: 'North York',
         company: 'Ontario',
         description: '',
@@ -140,6 +140,12 @@ export const skills: Array<ResumeEntryType> = [
     {
         position: 'Python',
         duration: '2 yr',
+        company: '',
+        description: '',
+    },
+    {
+        position: 'PWA',
+        duration: '1 yr',
         company: '',
         description: '',
     },
