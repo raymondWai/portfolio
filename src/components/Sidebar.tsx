@@ -4,6 +4,7 @@ import {
     listItemButtonClasses,
     ListItemIcon,
     ListItemText,
+    useMediaQuery,
 } from '@mui/material';
 import { Location } from 'history';
 import React, { MouseEvent, useMemo } from 'react';
@@ -63,7 +64,6 @@ interface SidebarProps {
     t: TFunction<('general' | 'route')[], undefined>;
 }
 const Sidebar = ({ location, history, collapse, t }: SidebarProps) => {
-    const theme = useTheme();
     const routes = useMemo(
         () =>
             Object.values(Routes).map((route, index) => {
@@ -82,6 +82,11 @@ const Sidebar = ({ location, history, collapse, t }: SidebarProps) => {
             }),
         [t, location, history, collapse]
     );
+    const theme = useTheme();
+    const isSM = useMediaQuery(theme.breakpoints.up('sm'));
+    if(!isSM && collapse) {
+        return null;
+    }
     return (
         <List
             component='nav'
@@ -92,7 +97,6 @@ const Sidebar = ({ location, history, collapse, t }: SidebarProps) => {
                 bgcolor: '#404040',
                 flexGrow: 1,
                 backgroundColor: 'background.default',
-                borderRight: `0.1rem solid ${theme.palette.primary.main}`
             }}
         >
             {routes}

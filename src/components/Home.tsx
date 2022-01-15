@@ -7,23 +7,26 @@ import React, {
     useEffect,
 } from 'react';
 import {
-    Button,
+    Dialog,
+    Fab,
     Grid,
     GridTypeMap,
     Step,
     StepContent,
-    StepLabel,
-    stepLabelClasses,
     Stepper,
     Typography,
+    useMediaQuery,
 } from '@mui/material';
 import { DefaultComponentProps } from '@mui/material/OverridableComponent';
-import { ResumeEntryType, sections } from 'src/constants/resumeData';
-import { styled, useTheme } from '@mui/styles';
+import { ResumeEntryType } from 'src/constants/resumeData';
+import { useTheme } from '@mui/styles';
 import { TFunction } from 'react-i18next';
 import InfoIcon from '@mui/icons-material/Info';
+import NavigationIcon from '@mui/icons-material/Navigation';
 import { getDisplayType } from 'src/utils/getDisplayType';
 import { useWindowSize } from 'src/hooks/useWindowSize';
+import StyledStepLabel from './StyledStepLabel';
+import HomeNav from './HomeNav';
 
 const HomePageContainer = forwardRef<
     RefObject<HTMLDivElement>,
@@ -34,28 +37,27 @@ const HomePageContainer = forwardRef<
     </Grid>
 ));
 
-const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
-    [`& .${stepLabelClasses.label}`]: {
-        color: `${theme.palette.secondary.main} !important`,
-    },
-}));
 interface HomeProps {
     expanded: boolean;
     resumeEntries: Array<ResumeEntryType & { expanded: boolean }>;
     activeSection: number;
+    navDialogShow: boolean;
     t: TFunction;
     onExpand: (e: MouseEvent<HTMLButtonElement>) => void;
     onTitleClick: (e: MouseEvent<HTMLDivElement>, index: number) => void;
     onSectionClick: (section: string) => void;
+    onNavDialogShow: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 const Home = ({
     resumeEntries,
     expanded,
     activeSection,
+    navDialogShow,
     t,
     onExpand,
     onTitleClick,
     onSectionClick,
+    onNavDialogShow,
 }: HomeProps) => {
     const theme = useTheme();
 
@@ -69,27 +71,36 @@ const Home = ({
     useEffect(() => {
         setDisplayType(getDisplayType(stepperContainerRef, stepperRef));
     }, [windowHeight, setDisplayType, stepperContainerRef, stepperRef]);
+
+    const isSM = useMediaQuery(theme.breakpoints.up('sm'));
     return (
         <HomePageContainer
             container
             direction={'row'}
             component='div'
+            flexGrow={1}
+            flexWrap={'wrap'}
             sx={{
-                height: '100%',
+                display: 'flex',
             }}
         >
             <Grid
                 item
                 container
-                xs={9}
-                justifyContent={'flex-start'}
+                xs={isSM ? 9 : 12}
+                justifyContent={isSM ? 'flex-start' : 'center'}
                 alignContent={'center'}
                 flexGrow={1}
                 sx={{
-                    paddingLeft: '5%',
-                    maxHeight: 'max(12rem, 100vh - 5rem)',
                     overflowY: 'scroll',
                     display: displayType,
+                    [theme.breakpoints.down('sm')]: {
+                        width: '100vw',
+                    },
+                    [theme.breakpoints.up('sm')]: {
+                        paddingLeft: '5%',
+                        maxHeight: 'max(12rem, 100vh - 5rem)',
+                    },
                 }}
                 ref={stepperContainerRef}
             >
@@ -136,47 +147,65 @@ const Home = ({
                     ))}
                 </Stepper>
             </Grid>
-            <Grid
-                item
-                container
-                direction='column'
-                justifyContent={'space-between'}
-                xs={3}
-                sx={{
-                    borderLeft: `0.1rem solid ${theme.palette.primary.main}`,
+            {!isSM && (
+                <Fab
+                    color='primary'
+                    sx={{
+                        position: 'absolute',
+                        bottom: 50,
+                        right: 10,
+                    }}
+                    onClick={onNavDialogShow}
+                >
+                    <NavigationIcon />
+                </Fab>
+            )}
+
+            {isSM && (
+                <Grid
+                    item
+                    container
+                    direction='column'
+                    justifyContent={'space-between'}
+                    xs={3}
+                    sx={{
+                        borderLeft: `0.1rem solid ${theme.palette.primary.main}`,
+                    }}
+                >
+                    <HomeNav
+                        expanded={expanded}
+                        activeSection={activeSection}
+                        t={t}
+                        onSectionClick={onSectionClick}
+                        onExpand={onExpand}
+                    />
+                </Grid>
+            )}
+            <Dialog
+                open={navDialogShow}
+                onClose={onNavDialogShow}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: 'background.default',
+                    },
                 }}
             >
-                <Stepper
-                    orientation='vertical'
-                    activeStep={activeSection}
-                    sx={{
-                        marginLeft: '0.5rem',
-                    }}
+                <Grid
+                    item
+                    container
+                    direction='column'
+                    justifyContent={'space-between'}
+                    xs={3}
                 >
-                    {sections.map((section, index) => (
-                        <Step
-                            key={index}
-                            onClick={() => onSectionClick(section)}
-                        >
-                            <StyledStepLabel>
-                                {t(`general:${section}`)}
-                            </StyledStepLabel>
-                        </Step>
-                    ))}
-                </Stepper>
-                <Button
-                    sx={{
-                        marginBottom: '0.5rem',
-                        marginLeft: '0.5rem',
-                        textAlign: 'right',
-                        justifyContent: 'flex-start',
-                        opacity: activeSection !== 0 ? 1 : 0,
-                    }}
-                    onClick={onExpand}
-                >
-                    {t(`general:${expanded ? 'collapse_all' : 'expand_all'}`)}
-                </Button>
-            </Grid>
+                    <HomeNav
+                        expanded={expanded}
+                        activeSection={activeSection}
+                        t={t}
+                        onSectionClick={onSectionClick}
+                        onExpand={onExpand}
+                    />
+                </Grid>
+            </Dialog>
         </HomePageContainer>
     );
 };

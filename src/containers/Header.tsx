@@ -1,5 +1,11 @@
 import { observer } from 'mobx-react';
-import React, { ChangeEvent, useCallback, useContext, MouseEvent } from 'react';
+import React, {
+    ChangeEvent,
+    useCallback,
+    useContext,
+    MouseEvent,
+    useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import Header from '../components/Header';
 import Locale from '../constants/locale';
@@ -11,6 +17,7 @@ import UIStore from '../store/ui';
 const HeaderContainer = () => {
     const { t, i18n } = useTranslation(['general']);
     const uiStore = useContext<UIStore>(UIContext);
+    const [isSettingShow, setIsSettingShow] = useState(false);
 
     const handleLocaleChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +47,12 @@ const HeaderContainer = () => {
         },
         [uiStore]
     );
+    const handleSettingPopupShow = useCallback(
+        (e: MouseEvent<HTMLButtonElement>) => {
+            setIsSettingShow(!isSettingShow);
+        },
+        [isSettingShow, setIsSettingShow]
+    );
 
     return (
         <Header
@@ -47,9 +60,11 @@ const HeaderContainer = () => {
             locale={uiStore.locale}
             theme={uiStore.theme}
             sidebarCollapse={uiStore.sidebarCollapse}
+            isSettingShow={isSettingShow}
             handleLocaleChange={handleLocaleChange}
             handleThemeChange={handleThemeChange}
             handleCollapseBtnClick={handleCollapseBtnClick}
+            handleSettingPopupShow={handleSettingPopupShow}
         />
     );
 };

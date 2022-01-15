@@ -29,6 +29,6 @@ export interface CustomTheme {
 
 declare module '@mui/system' {
     interface Theme extends CustomTheme {}
-    interface DefaultTheme extends CustomTheme {}
+    interface DefaultTheme extends Theme {}
     interface ThemeOptions extends CustomTheme {}
 }

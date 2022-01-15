@@ -14,6 +14,9 @@ const RowFormControl = styled(FormControl)(({ theme }) => ({
     marginHorizontal: '1rem',
     display: 'flex',
     flexWrap: 'wrap',
+    [theme.breakpoints.down('sm')]: {
+        justifyContent: 'center',
+    },
 }));
 const VCenterLabel = styled(Typography)(({ theme }) => ({
     [`&.${typographyClasses.root}`]: {
@@ -50,7 +53,7 @@ export default function RadioInput<OptionType>({
                             checked={value === option.value}
                             sx={{
                                 '& input:hover, &:hover': {
-                                    backgroundColor: 'rgba(0,0,0,0)'
+                                    backgroundColor: 'rgba(0,0,0,0)',
                                 },
                             }}
                         />
@@ -73,6 +76,7 @@ export default function RadioInput<OptionType>({
                     flexGrow: 1,
                     flexDirection: 'row',
                     overflow: 'auto',
+                    justifyContent: 'center'
                 }}
             >
                 {memoOptions}

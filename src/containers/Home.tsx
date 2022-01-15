@@ -20,13 +20,15 @@ import Home from '../components/Home';
 
 const HomeContainer = (props: RouteProps) => {
     const { t } = useTranslation(['general']);
-    const [resumeEntries, setResumeEntries] = useState( //resume data
+    const [resumeEntries, setResumeEntries] = useState(
+        //resume data
         workExperiences.map((exp) => ({
             ...exp,
             expanded: false,
         }))
     );
-    const [activeSection, setActiveSection] = useState(0);//state of right sidebar
+    const [activeSection, setActiveSection] = useState(0); //state of right sidebar
+    const [navDialogShow, setNavDialogShow] = useState(false);
     const expanded = useMemo(
         () => resumeEntries.filter((entry) => !entry.expanded).length === 0, //true if all resume entry shown expanded
         [resumeEntries]
@@ -65,6 +67,12 @@ const HomeContainer = (props: RouteProps) => {
             );
         },
         [setActiveSection]
+    );
+    const onNavDialogShow = useCallback(
+        (e: MouseEvent<HTMLButtonElement>) => {
+            setNavDialogShow(!navDialogShow);
+        },
+        [navDialogShow, setNavDialogShow]
     );
 
     useEffect(() => {
@@ -119,10 +127,12 @@ const HomeContainer = (props: RouteProps) => {
             resumeEntries={resumeEntries}
             expanded={expanded}
             activeSection={activeSection}
+            navDialogShow={navDialogShow}
             onExpand={onExpand}
             t={t}
             onTitleClick={onTitleClick}
             onSectionClick={onSectionClick}
+            onNavDialogShow={onNavDialogShow}
         />
     );
 };
